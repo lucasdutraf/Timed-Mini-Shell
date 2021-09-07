@@ -6,6 +6,8 @@
 *.ko
 *.obj
 *.elf
+prog
+timed-shell
 
 # Linker output
 *.ilk
