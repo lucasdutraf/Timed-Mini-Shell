@@ -8,29 +8,28 @@
 #include <errno.h>
 
 
-float time_difference(struct timeval *start, struct timeval *end) {
+double time_difference(struct timeval *start, struct timeval *end) {
     return (end->tv_sec - start->tv_sec) + 1e-6*(end->tv_usec - start->tv_usec);
 }
 
 void parent_handler() {
     int child_status;
-    pid_t p = wait(&child_status);
-    printf("filho %d terminou com %d, também vou\n", p, WEXITSTATUS(child_status));
-
-}
-
-void child_handler(const char *path, const char *args) {
     struct timeval start, end;
 
     gettimeofday(&start, NULL);
-    int return_code = execl(path, path, args, NULL);
+    pid_t p = wait(&child_status);
     gettimeofday(&end, NULL);
 
-    if (return_code == -1){
-        printf("> Erro: %s\n", strerror(errno));
-        _exit(errno);
-    }
-    printf("> Demorou %0.1f segundos, retornou %d\n", time_difference(&start, &end), return_code);
+    printf("> Demorou %0.1lf segundos, retornou %d\n", time_difference(&start , &end), WEXITSTATUS(child_status));
+    fflush(stdout);
+    // sempre quem tem que imprimir o tempo de execução e o código de retorno é o processo pai
+}
+
+void child_handler(const char *path, const char *args) {
+    execl(path, path, args, NULL);
+
+    printf("> Erro: %s\n", strerror(errno));
+    exit(errno);
 }
 
 
@@ -40,7 +39,7 @@ int main (void) {
 
     gettimeofday(&initial_total_time, NULL);
 
-    while (scanf("%s %s", path, args) != EOF) {
+    while (scanf("%s %[^\n]", path, args) == 2) { //verificando se o scanf retornou 2 valores
         pid_t pid = fork();
         if (pid == 0) { // child
             child_handler(path, args);
@@ -52,6 +51,6 @@ int main (void) {
 
     gettimeofday(&final_total_time, NULL);
 
-    printf(">> O tempo total foi de %0.1f segundos\n", time_difference(&initial_total_time , &final_total_time));
+    printf(">> O tempo total foi de %0.1lf segundos\n", time_difference(&initial_total_time , &final_total_time));
     return 0;
 }
