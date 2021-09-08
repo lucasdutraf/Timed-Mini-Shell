@@ -9,10 +9,14 @@ O mini shell deve ser capaz de ler um conjunto de comandos, pela entrada padrão
 - [x] Ler a entrada padrão enquanto for diferente de EOF
 - [x] Criar um processo filho para executar o comando
   - [x] Executar comando do path inserido (execl)
-- [ ] Calcular quantos segundos o programa demorou a ser executado
-- [ ] Capturar retorno do programa
+- [x] Calcular quantos segundos o programa demorou a ser executado
+- [x] Capturar retorno do programa
   - [x] Capturar o erro caso o path não exista
 - [x] Calcular o tempo total de execução do programa
+
+## Problemas pendentes
+- [ ] Duplicação de print para caso de erro
+  - [ ] Descobrir o que cada um tá imprimindo na saída de erro
 ## Executando o projeto
 
 - Compilando o projeto:
