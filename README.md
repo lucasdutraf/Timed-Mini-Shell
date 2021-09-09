@@ -1,40 +1,69 @@
 # Timed Mini Shell
 
-O mini shell deve ser capaz de ler um conjunto de comandos, pela entrada padrão, executar o comando e ao terminar a execução do comando ele deverá imprimir o tempo (em segundos) de execução e o código de retorno do programa.
+The mini shell should be able to read a set of commands, by standard input, execute the command, and when the command execution is finished it should print the time (in seconds) of execution and the return code of the program.
 
-## Milestones
+Assignment 1 of Operating System Fundamentals.
 
-- [x] Ler a entrada padrão composta de duas strings (path do comando e argumento)
-  - [x] Testar lendo a entrada a partir de um arquivo
-- [x] Ler a entrada padrão enquanto for diferente de EOF
-- [x] Criar um processo filho para executar o comando
-  - [x] Executar comando do path inserido (execl)
-- [x] Calcular quantos segundos o programa demorou a ser executado
-- [x] Capturar retorno do programa
-  - [x] Capturar o erro caso o path não exista
-- [x] Calcular o tempo total de execução do programa
+## Running the project
 
-## Problemas pendentes
-- [ ] Duplicação de print para caso de erro
-  - [ ] Descobrir o que cada um tá imprimindo na saída de erro
-## Executando o projeto
-
-- Compilando o projeto:
+- Compiling the program:
 ```bash
     make comp
 ```
 
-- Executando o projeto:
+- Executing the project:
 ```bash
     make exec
 ```
 
-- Compilando e executando o projeto
+- Compiling and executing the program:
 ```bash
     make run
 ```
 
-- Executando com inputs de arquivo e redirecionando a saída para um arquivo
+- Executing with file inputs and redirecting the output to a file:
 ```bash
     make run-file
+```
+
+## Examples
+
+### Example 1
+
+** Input: **
+```bash
+/bin/sleep 1
+/bin/sleep 1.1
+/bin/eunaoexisto 123
+```
+
+** Output: **
+```bash
+> Demorou 1.0 segundos, retornou 0
+> Demorou 1.1 segundos, retornou 0
+> Erro: No such file or directory
+> Demorou 0.0 segundos, retornou 2
+>> O tempo total foi de 2.1 segundos
+```
+
+### Example 2
+
+** Input: **
+```bash
+/bin/sleep 1.5
+/bin/true ign
+/bin/false 222
+/bin/uname -s
+/bin/sleep 1
+```
+
+** Output: **
+```bash
+> Demorou 1.5 segundos, retornou 0
+> Demorou 0.0 segundos, retornou 0
+> Demorou 0.0 segundos, retornou 1
+Linux
+> Demorou 0.0 segundos, retornou 0
+> Demorou 1.0 segundos, retornou 0
+>> O tempo total foi de 2.5 segundos
 ```
