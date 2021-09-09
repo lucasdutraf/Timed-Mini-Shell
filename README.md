@@ -30,14 +30,14 @@ Assignment 1 of Operating System Fundamentals.
 
 ### Example 1
 
-** Input: **
+**Input:**
 ```bash
 /bin/sleep 1
 /bin/sleep 1.1
 /bin/eunaoexisto 123
 ```
 
-** Output: **
+**Output:**
 ```bash
 > Demorou 1.0 segundos, retornou 0
 > Demorou 1.1 segundos, retornou 0
@@ -48,7 +48,7 @@ Assignment 1 of Operating System Fundamentals.
 
 ### Example 2
 
-** Input: **
+**Input:**
 ```bash
 /bin/sleep 1.5
 /bin/true ign
@@ -57,7 +57,7 @@ Assignment 1 of Operating System Fundamentals.
 /bin/sleep 1
 ```
 
-** Output: **
+**Output:**
 ```bash
 > Demorou 1.5 segundos, retornou 0
 > Demorou 0.0 segundos, retornou 0
